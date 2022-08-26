@@ -1,10 +1,33 @@
 const http = require("http");
 const url = require("url");
+const fs = require("fs");
 
 const server = http.createServer(function (req, res) {
-  const address_url="http://localhost:5000/contact?name=mezba&country=bangladesh";
-  const parsed_url = url.parse(address_url, true);
-  console.log(parsed_url);
+  if(req.url = '/') {
+    // fs.readFile('data.ai', (error, data) => {
+    //     if(error) {
+    //         res.write('Failed to Read Data !!!!!!');
+    //         res.end();
+    //     }
+    //     else {
+    //         res.write(data);
+    //         res.end();
+    //     }
+    // })
+    // const data = fs.readFileSync('data.ai');
+    // res.write(data);
+    // res.end();
+
+    fs.rename('newData.txt', 'oldData.txt', (err) => {
+        if(err) {
+            res.write('Failed to rename file');
+            res.end();
+        } else {
+            res.write('Successfully renamed file');
+            res.end();
+        }
+    })
+  }
 });
 
 const PORT = 5000;
